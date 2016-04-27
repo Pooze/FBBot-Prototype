@@ -3,14 +3,14 @@ var router = express.Router();
 var request = require('request');
 
 
-router.get('/webhook/', function (req, res) {
+router.get('/', function (req, res) {
   if (req.query['hub.verify_token'] === process.env.FBBOT_TOKEN) {
     res.send(req.query['hub.challenge']);
   }
   res.send('Error, wrong validation token');
 })
 
-router.post('/webhook/', function (req, res) {
+router.post('/', function (req, res) {
   console.log('req.body', req.body);
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
